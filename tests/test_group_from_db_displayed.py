@@ -15,3 +15,9 @@ def test_base_page_opens(browser):
 def test_something():
     with allure.step("Step 1"):
         assert 1 == 1
+
+@allure.story("Check something2")
+def test_something_2():
+    with allure.step("Step 33"):
+        assert 1 == 1
+        print('123')
