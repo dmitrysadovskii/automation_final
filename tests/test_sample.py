@@ -2,7 +2,7 @@ from pages.base_page import BasePage
 from pages.login_page import LoginPage
 from pages.groups_page import GroupsPage
 from pages.main_admin_page import MainAdminPage
-from helpers.db_helper import add_db_group, connect_db
+from helpers.db_helper import add_db_group, connect_db, delete_db_group
 from helpers.general_helpers import generate_string
 
 
@@ -20,3 +20,4 @@ def test_db_group_added_and_displayed(browser):
     mp.open_groups_page()
     gp = GroupsPage(browser)
     gp.check_group_exist(group_name)
+

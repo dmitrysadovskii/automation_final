@@ -1,5 +1,5 @@
 from sqlalchemy import create_engine
-from sqlalchemy import insert
+from sqlalchemy import insert, delete
 from sqlalchemy import table, column
 
 
@@ -15,5 +15,16 @@ def add_db_group(db, group_name):
                              )
     stmt = (
         insert(auth_group_table).values(name=group_name)
+    )
+    db.execute(stmt)
+
+
+def delete_db_group(db, group):
+    auth_group_table = table("auth_group",
+                             column("id"),
+                             column("name")
+                             )
+    stmt = (
+        delete(auth_group_table).where(auth_group_table.c.name == group)
     )
     db.execute(stmt)
