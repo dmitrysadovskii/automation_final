@@ -4,11 +4,11 @@ import pytest
 
 @pytest.fixture()
 def browser():
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument('--no-sandbox')
-    chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--disable-gpu')
-    driver = webdriver.Chrome(chrome_options=chrome_options)
+    options = webdriver.ChromeOptions()
+    options.add_argument('--no-sandbox')
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    driver = webdriver.Chrome(chrome_options=options)
     driver.implicitly_wait(5)
     yield driver
     driver.quit()
