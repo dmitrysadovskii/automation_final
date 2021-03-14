@@ -1,15 +1,16 @@
-from pages.base_page import BAsePage
-from time import sleep
+from pages.base_page import BasePage
+from pages.login_page import LoginPage
 import allure
 
 
 @allure.story("Check that main page opens")
 def test_base_page_opens(browser):
-    bp = BAsePage(browser)
-    with allure.step("Open main page"):
-        bp.open_base_page()
-        sleep(4)
-
+    bp = BasePage(browser)
+    bp.open_base_page()
+    lp = LoginPage(browser)
+    lp.open_login_page()
+    lp.login_as_admin()
+    lp.check_logged_in()
 
 @allure.story("Check something")
 def test_something():
