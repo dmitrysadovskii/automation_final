@@ -9,3 +9,9 @@ def test_base_page_opens(browser):
     with allure.step("Open main page"):
         bp.open_base_page()
         sleep(4)
+
+
+@allure.story("Check something")
+def test_something():
+    with allure.step("Step 1"):
+        assert 1 == 1
