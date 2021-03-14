@@ -6,10 +6,7 @@ from helpers.db_helper import add_db_group, connect_db, delete_db_group
 from helpers.general_helpers import generate_string
 
 
-def test_db_group_added_and_displayed(browser):
-    db = connect_db()
-    group_name = generate_string(8)
-    add_db_group(db, group_name)
+def test_db_group_added_and_displayed(browser, create_group):
     bp = BasePage(browser)
     bp.open_base_page()
     lg = LoginPage(browser)
@@ -19,5 +16,5 @@ def test_db_group_added_and_displayed(browser):
     mp.should_be_main_page()
     mp.open_groups_page()
     gp = GroupsPage(browser)
-    gp.check_group_exist(group_name)
+    gp.check_group_exist(create_group)
 
