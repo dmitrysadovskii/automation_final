@@ -1,11 +1,9 @@
 from selenium import webdriver
 import pytest
-from time import sleep
 
 
 @pytest.fixture()
 def browser():
-    sleep(5)
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--headless')
