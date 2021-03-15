@@ -35,3 +35,5 @@ def create_group():
         delete(auth_group_table).where(auth_group_table.c.name == name)
     )
     engine.execute(stmt)
+
+

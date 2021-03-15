@@ -1,30 +1,28 @@
 from sqlalchemy import create_engine
-from sqlalchemy import insert, delete
+from sqlalchemy import insert, delete, select
 from sqlalchemy import table, column
 
 
-def connect_db():
+def clear_db_user_groups_table():
     engine = create_engine('postgresql+psycopg2://postgres:postgres@localhost/postgres')
-    return engine
+    engine.execute('TRUNCATE TABLE auth_user_groups CASCADE')
+
+def clear_db_user_not_admin():
+    engine = create_engine('postgresql+psycopg2://postgres:postgres@localhost/postgres')
+    engine.execute("DELETE FROM auth_user WHERE username != 'admin'")
 
 
-def add_db_group(db, group_name):
-    auth_group_table = table("auth_group",
-                             column("id"),
-                             column("name")
-                             )
-    stmt = (
-        insert(auth_group_table).values(name=group_name)
-    )
-    db.execute(stmt)
 
-
-def delete_db_group(db, group):
-    auth_group_table = table("auth_group",
-                             column("id"),
-                             column("name")
-                             )
-    stmt = (
-        delete(auth_group_table).where(auth_group_table.c.name == group)
-    )
-    db.execute(stmt)
+def check_user_in_group_db(username: str, groupname: str):
+    query = f'''
+    SELECT aug.id FROM public.auth_user au
+    left join public.auth_user_groups aug
+        on au.id=aug.user_id 
+    left join public.auth_group ag
+        on ag.id=aug.group_id 
+    WHERE au.username in ('{username}')
+        and ag.name in ('{groupname}')
+    '''
+    engine = create_engine('postgresql+psycopg2://postgres:postgres@localhost/postgres')
+    t = engine.execute(query).fetchall()
+    return len(t) > 0

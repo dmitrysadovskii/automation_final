@@ -1,6 +1,7 @@
 from pages.base_page import BasePage
 from locators.locators_groups_page import GroupsLOcators
 
+
 class GroupsPage(BasePage, GroupsLOcators):
 
     def check_group_exist(self, group):
@@ -10,3 +11,4 @@ class GroupsPage(BasePage, GroupsLOcators):
             if group in i.text:
                 exist = True
         assert exist is True, f"{group} not found"
+        print(f"{group} exist")

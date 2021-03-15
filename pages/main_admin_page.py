@@ -10,3 +10,11 @@ class MainAdminPage(BasePage, MainAdminLOcators):
     def open_groups_page(self):
         groups_link = self.find_element(self.LOCATOR_GROUPS)
         groups_link.click()
+
+    def open_users_page(self):
+        users_link = self.find_element(self.LOCATOR_USERS)
+        users_link.click()
+
+    def open_add_user_page(self):
+        add_user_link = self.find_element(self.LOCATOR_ADD_USER)
+        add_user_link.click()
