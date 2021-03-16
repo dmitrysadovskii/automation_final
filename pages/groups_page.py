@@ -6,9 +6,7 @@ class GroupsPage(BasePage, GroupsLOcators):
 
     def check_group_exist(self, group):
         groups = self.find_elements(self.LOCATOR_GROUP_ROW)
-        exist = False
-        for i in groups:
-            if group in i.text:
-                exist = True
-        assert exist is True, f"{group} not found"
-        print(f"{group} exist")
+        group_list = [i.text for i in groups]
+        assert group in group_list, f'{group} not found in {group_list}'
+        print(f'{group} found in {group_list}')
+
